@@ -28,13 +28,13 @@ class Detail
     private $prix;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Commande::class, inversedBy="details", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity=Commande::class, inversedBy="details")
      * @ORM\JoinColumn(nullable=false)
      */
     private $commande;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Produit::class, inversedBy="details", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity=Produit::class, inversedBy="details")
      * @ORM\JoinColumn(nullable=false)
      */
     private $produit;

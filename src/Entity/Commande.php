@@ -36,7 +36,7 @@ class Commande
     private $date_enregistrement;
 
     /**
-     * @ORM\OneToMany(targetEntity=Detail::class, mappedBy="commande", orphanRemoval=true, cascade={"persist"})
+     * @ORM\OneToMany(targetEntity=Detail::class, mappedBy="commande", orphanRemoval=true)
      */
     private $details;
 

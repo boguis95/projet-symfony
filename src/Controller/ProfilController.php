@@ -34,10 +34,10 @@ class ProfilController extends AbstractController
         foreach($panier as $ligne){
             $montant += $ligne["produit"]->getPrix() * $ligne["quantite"];
             $detail = new Detail;
-            $detail->setQuantite($ligne["quantite"]);
-            $detail->setProduit($ligne["produit"]);
+            $detail->setQuantite($ligne["quantite"]);    
             $detail->setPrix($ligne["produit"]->getPrix());
-            $cmd->addDetail($detail);
+            $detail->setProduit($ligne["produit"]);
+            $detail->setCommande($cmd);
         }
         $cmd->setMontant($montant);
         $em->persist($cmd);
