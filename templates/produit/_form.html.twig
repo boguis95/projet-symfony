@@ -1,0 +1,14 @@
+{{ form_start(form) }}
+   
+    {% if produit.photo is empty %}
+        {{ form_row(form.photo) }}
+    {% else %}
+            <div class="row">
+            <img class="vignette" class="col" src="{{ asset("images/" ~ produit.photo) }}">
+            {{ form_row(form.photo, { "row_attr": { "class": "col" }}) }}
+        </div>
+    {% endif %}
+        
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}

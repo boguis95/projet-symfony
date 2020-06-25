@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PanierController!{% endblock %}
+
+{% block body %}
+<h1>Mon panier</h1>
+
+<table class="table">
+        <thead>
+            <tr>
+                <td colspan=6>Nombre de produit(s) : {{ panier|length }}</td>
+                <td>
+                    <a href="{{ path("vider_panier") }}">Vider le panier</a>
+                </td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <th>Réf.</th>
+                <th>Produit</th>
+                <th>Prix unitaire</th>
+                <th>Qté</th>
+                <th>Prix</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        {% set prixTotal = 0 %}
+        <tbody>
+        {% for ligne in panier %}
+            <tr>
+                <td>                    
+                    <img class="vignette" src="{{ asset("images/" ~ ligne.produit.photo)  }}">
+                </td>
+                <td>{{ ligne.produit.reference }}</td>
+                <td>{{ ligne.produit.titre }}</td>
+                <td>{{ ligne.produit.prix }} €</td>
+                <td>{{ ligne.quantite }}</td>
+                <td>{{ ligne.produit.prix * ligne.quantite }} €</td>
+                <td>
+                    <a href="{{ path('supprimer_produit_panier', {id: ligne.produit.id}) }}">
+                        <i class="fa fa-trash"></i>
+                    </a>
+
+                    <form method="GET" action="{{ path("modifier_produit_panier", { id: ligne.produit.id }) }}" class="mt-2">
+                            <input type="number" name="qte" value={{ ligne.quantite }} min=1 max={{ ligne.produit.stock }}>
+                            <button class="btn btn-info">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                    </form>
+                                    
+                </td>
+            </tr>
+            {% set prixTotal = prixTotal + ligne.produit.prix * ligne.quantite %}
+        {% else %}
+            <tr>
+                <td colspan="7">Aucun produit dans le panier</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+        <tfooter>
+            <tr>
+                <th colspan="5">Total</th>
+                <td>€ {{ prixTotal }}</td>
+                <td></td>
+            </tr>
+        </tfooter>
+    </table>
+
+    {# EXO : Le bouton ne doit être afficher que si le panier n'est pas vide #}
+    <a href="{{ path("commander") }}" class="btn btn-primary">Commander</a>
+{% endblock %}

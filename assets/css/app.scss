@@ -1,0 +1,18 @@
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+@import "~bulma";
+
+body {
+    background-color: rgb(170, 180, 212);
+}
+
+th{
+    font-size: 1.1em;
+}
+
+img.vignette{
+    display: block;
+    max-width: 100px;
+    max-height: 100px;
+    width: auto;
+    height: auto;
+}

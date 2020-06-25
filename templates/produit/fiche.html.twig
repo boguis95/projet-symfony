@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+   <div class="card" style="margin-right: 0;margin-left: 0;">
+        <img class="vignette card-img-top mx-auto" src="{{ asset("images/" ~ produit.photo ) }}" alt="{{ produit.titre }}">
+        <div class="card-body">
+            <h5 class="card-title">Nom : {{ produit.titre }}</h5>
+            <p class="card-text">Référence : {{ produit.reference }}</p>
+            <p class="card-text">Catégorie : {{ produit.categorie }}</p>
+            <p class="card-text">Description : {{ produit.description }}</p>
+            <p class="card-text">Prix : {{ produit.prix }} €</p>
+            <p class="card-text">Stock : {{ produit.stock }}</p>
+        </div>
+    </div>
+        
+{% endblock body %}

@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil Membre{% endblock %}
+
+{# Dans un template twig, il y a une variable globale qui permet d'accéder à plusieurs informations concernant 
+    le site : app
+    Par exemple 
+        app.user : utilisateur connecté
+#}
+
+{% block body %}
+    <h1>Profil du membre {{ app.user.pseudo }}</h1>
+    <div class="row">
+        <div class="col-6">
+            <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Email</th>
+                            <td>{{ app.user.email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Password</th>
+                            <td>***</td>
+                        </tr>
+                        <tr>
+                            <th>Pseudo</th>
+                            <td>{{ app.user.pseudo }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nom</th>
+                            <td>{{ app.user.nom }}</td>
+                        </tr>
+                        <tr>
+                            <th>Prénom</th>
+                            <td>{{ app.user.prenom }}</td>
+                        </tr>
+                        <tr>
+                            <th>Civilité</th>
+                            <td>{{ app.user.civilite }}</td>
+                        </tr>
+                        <tr>
+                            <th>Adresse</th>
+                            <td>{{ app.user.adresse }}</td>
+                        </tr>                        
+                        <tr>
+                            <th>Code Postal</th>
+                            <td>{{ app.user.codePostal }}</td>
+                        </tr>
+                        <tr>
+                            <th>Ville</th>
+                            <td>{{ app.user.ville }}</td>
+                        </tr>
+                    </tbody>
+            </table>
+                
+        </div>
+
+        <div class="col-6">
+            <h2>Historique des commandes</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Montant</th>
+                        <th>Etat</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for commande in app.user.commandes %}
+                    <tr>
+                        <td>{{ commande.dateEnregistrement ? commande.dateEnregistrement|date('d/m/y H:i:s') : '' }}</td>
+                        <td>{{ commande.montant }}</td>
+                        <td>{{ commande.etat }}</td>
+                        <td>
+                            <a href="{{ path('commande_show', {'id': commande.id}) }}"><i class="fa fa-file"></i></a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">Aucune commande</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

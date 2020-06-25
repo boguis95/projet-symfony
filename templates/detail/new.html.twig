@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}NouveauDetail{% endblock %}
+
+{% block body %}
+    <h1>Créer Detail</h1>
+
+    {{ include('detail/_form.html.twig') }}
+
+    <a href="{{ path('detail_index') }}"><i class="fa fa-reply"></i> Retour à la liste</a>
+{% endblock %}

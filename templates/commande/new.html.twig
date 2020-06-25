@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}NouveauCommande{% endblock %}
+
+{% block body %}
+    <h1>Créer Commande</h1>
+
+    {{ include('commande/_form.html.twig') }}
+
+    <a href="{{ path('commande_index') }}"><i class="fa fa-reply"></i> Retour à la liste</a>
+{% endblock %}
