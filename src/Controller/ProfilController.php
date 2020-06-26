@@ -37,7 +37,12 @@ class ProfilController extends AbstractController
             $detail = new Detail;
             $detail->setQuantite($ligne["quantite"]);    
             $detail->setPrix($ligne["produit"]->getPrix());
-            $detail->setProduit($pr->find($ligne["produit"]->getId()));
+            // EXO : vérifier que la quantité commandée ne dépasse pas le stock
+            //       sinon, réduire la quantité commandée (= stock)
+            $prod = $pr->find($ligne["produit"]->getId());
+            $prod->setStock($prod->getStock() - $ligne["quantite"]);
+
+            $detail->setProduit($prod);
             $detail->setCommande($cmd);
             $em->persist($detail);
         }
@@ -48,5 +53,19 @@ class ProfilController extends AbstractController
         return $this->redirectToRoute("profil");
     }
 
-
+    /**
+     * @Route("/profil/commande/{id}", name="profil_commande_detaille", methods={"GET"})
+     */
+    public function show(Commande $commande)
+    {
+        // EXO : vérifier que la commande que l'on veut afficher a été passé par le membre connecté
+        //      sinon rediriger vers la page profil
+        if( $this->getUser()->getId() == $commande->getMembre()->getId() ){
+            return $this->render('commande/show.html.twig', [
+                'commande' => $commande,
+            ]);
+        }
+        $this->addFlash("danger", "Vous ne pouvez pas afficher cette commande");
+        return $this->redirectToRoute("profil");
+    }
 }

@@ -22,6 +22,25 @@ class ProduitRepository extends ServiceEntityRepository
     // /**
     //  * @return Produit[] Returns an array of Produit objects
     //  */
+    public function findByWord($mot)
+    {
+        // SELECT p.*
+        // FROM produit p
+        // WHERE p.titre LIKE "%mot%"
+        return $this->createQueryBuilder('p')
+            ->where('p.titre LIKE :val')
+            ->setParameter('val', "%" . $mot . "%")
+            ->orderBy('p.titre', 'ASC')
+            ->addOrderBy("p.categorie")
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
+    // /**
+    //  * @return Produit[] Returns an array of Produit objects
+    //  */
     /*
     public function findByExampleField($value)
     {

@@ -1,0 +1,8 @@
+{% extends 'accueil/index.html.twig' %}
+
+{% block title %}Résultat Recherche | Boutique  {% endblock %}
+
+{% block body %}
+    <h1>Recherche : {{ mot|length }}</h1>
+    {{ parent() }}
+{% endblock %}

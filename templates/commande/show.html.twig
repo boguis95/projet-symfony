@@ -3,7 +3,7 @@
 {% block title %}Commande{% endblock %}
 
 {% block body %}
-    <h1>Commande</h1>
+    <h1>Commande de {{ commande.membre.pseudo|upper }}</h1>
 
     <table class="table">
         <tbody>
@@ -25,10 +25,46 @@
             </tr>
         </tbody>
     </table>
+    
+    {# EXO : afficher le détail de la commande dans une table html #}
+    <table class="table table-bordered>">
+        <thead class="thead-dark">
+            <tr>
+                <th>Produit</th>
+                <th>Quantité</th>
+                <th>Prix unitaire</th>
+                <th>Prix</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% set total = 0 %}
+        {% for detail in commande.details %}
+            <tr>
+                <td>{{ detail.produit.titre }}</td>
+                <td>{{ detail.quantite }}</td>
+                <td>{{ detail.prix }}</td>
+                <td>{{ detail.quantite * detail.prix }}</td>
+            </tr>
+            {% set total = total + detail.quantite * detail.prix %}
+        {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="3">Total</th>
+                <td>{{ total }} €</td>
+            </tr>
+    </tfoot>
+    </table>
 
-    <a href="{{ path('commande_index') }}"><i class="fa fa-reply"></i> Retour à la liste</a>
+    {# EXO : le lien doit renvoyer vers la page profil si on n'est pas admin #}
+    <a href="{{ is_granted("ROLE_ADMIN") ? path('commande_index') : path('profil') }}">
+        <i class="fa fa-reply"></i> Retour
+    </a>
 
-    <a href="{{ path('commande_edit', {'id': commande.id}) }}"><i class="fa fa-edit"></i></a>
+    {# EXO : les 2 liens ci-dessous ne doivent s'afficher que si on  est admin #}
+    {% if is_granted("ROLE_ADMIN") %}
+        <a href="{{ path('commande_edit', {'id': commande.id}) }}"><i class="fa fa-edit"></i></a>
 
-    {{ include('commande/_delete_form.html.twig') }}
+        {{ include('commande/_delete_form.html.twig') }}
+    {% endif %}
 {% endblock %}
