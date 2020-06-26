@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Commande, App\Entity\Detail;
+use App\Repository\ProduitRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface as Session;
@@ -23,7 +24,7 @@ class ProfilController extends AbstractController
     /**
      * @Route("/commander", name="commander")
      */
-    public function commander(Session $session, EntityManager $em)
+    public function commander(Session $session, EntityManager $em, ProduitRepository $pr)
     {
         $panier = $session->get("panier");
         $cmd = new Commande;
@@ -36,8 +37,9 @@ class ProfilController extends AbstractController
             $detail = new Detail;
             $detail->setQuantite($ligne["quantite"]);    
             $detail->setPrix($ligne["produit"]->getPrix());
-            $detail->setProduit($ligne["produit"]);
+            $detail->setProduit($pr->find($ligne["produit"]->getId()));
             $detail->setCommande($cmd);
+            $em->persist($detail);
         }
         $cmd->setMontant($montant);
         $em->persist($cmd);
