@@ -60,7 +60,7 @@
         <tfooter>
             <tr>
                 <th colspan="5">Total</th>
-                <td>€ {{ prixTotal }}</td>
+                <td>€ {{ prixTotal|format_number({fraction_digit: 2}) }}</td>
                 <td></td>
             </tr>
         </tfooter>
