@@ -185,9 +185,18 @@ class Produit
         return $this->stock;
     }
 
+    /**
+     * Si $stock est négatif, il sera soustrait à la valeur initiale
+     * Sinon $stock sera affecté à la propriété stock
+     * @param int $stock
+     */
     public function setStock(int $stock): self
     {
-        $this->stock = $stock;
+        if($stock < 0){
+            $this->stock += $stock;
+        } else {
+            $this->stock = $stock;
+        }
 
         return $this;
     }

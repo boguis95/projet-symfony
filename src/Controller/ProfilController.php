@@ -40,7 +40,7 @@ class ProfilController extends AbstractController
             // EXO : vérifier que la quantité commandée ne dépasse pas le stock
             //       sinon, réduire la quantité commandée (= stock)
             $prod = $pr->find($ligne["produit"]->getId());
-            $prod->setStock($prod->getStock() - $ligne["quantite"]);
+            $prod->setStock( -$ligne["quantite"]);
 
             $detail->setProduit($prod);
             $detail->setCommande($cmd);

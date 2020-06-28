@@ -17,13 +17,14 @@ class ProduitType extends AbstractType
             ->add('photo', FileType::class, [
                 "mapped" => false,
                 "constraints" => [
-                   new File([ 
-                       "mimeTypes" => [ "image/jpeg", "image/png", "image/gif" ],
-                       "mimeTypesMessage" => "Formats autorisés : jpg, png, gif",
-                       "maxSize" => "2048k",
-                       "maxSizeMessage" => "Le fichier ne doit pas dépasser 2Mo"
-                   ]) 
-                ]
+                    new File([ 
+                        "mimeTypes" => [ "image/jpeg", "image/png", "image/gif" ],
+                        "mimeTypesMessage" => "Formats autorisés : jpg, png, gif",
+                        "maxSize" => "2048k",
+                        "maxSizeMessage" => "Le fichier ne doit pas dépasser 2Mo"
+                    ]) 
+                ],
+                "required" => false,
 
             ])
             ->add('reference')
