@@ -16,3 +16,9 @@ img.vignette{
     width: auto;
     height: auto;
 }
+
+.card img.vignette {
+    display: block;
+    width: auto;
+    height: 100px;
+}

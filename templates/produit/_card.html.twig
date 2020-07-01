@@ -1,18 +1,30 @@
 <div class="card" style="margin-right: 0;margin-left: 0;">
-    <img class="vignette card-img-top mx-auto" src="{{ asset("images/" ~ produit.photo ) }}" alt="{{ produit.titre }}">
+    <div class="card-header">
+        <img class="vignette card-img-top mx-auto" src="{{ asset("images/" ~ produit.photo ) }}"
+            alt="{{ produit.titre }}">
+    </div>
     <div class="card-body">
         <h5 class="card-title">Nom : {{ produit.titre }}</h5>
         <p class="card-text">Référence : {{ produit.reference }}</p>
         <p class="card-text">Catégorie : {{ produit.categorie }}</p>
         <p class="card-text">Prix : {{ produit.prix }} €</p>
         <p class="card-text">Stock : {{ produit.stock }}</p>
-        <a href="{{ path("fiche_produit", { reference: produit.reference }) }}" class="btn btn-primary">Voir</a>
-        
-        <form method="GET" action="{{ path("ajouter_panier", { id: produit.id }) }}" class="mt-2">
-            <input type="number" name="qte" value=1 min=1 max={{ produit.stock }}>
-            <button class="btn btn-info">
-                <i class="fa fa-cart-plus"></i>
-            </button>
+    </div>
+    <div class="card-footer">
+        <form method="GET" action="{{ path("ajouter_panier", { id: produit.id }) }}" class="mt-2 form-inline" id="">
+            <div class="row m-0">
+                <a href="{{ path("fiche_produit", { reference: produit.reference }) }}"
+                    class="btn btn-primary col-12 col-md-3">Voir</a>
+
+                <div class="col-12 col-md-2"></div>
+
+                <div class="col-12 col-md-7 d-flex flex-row justify-content-between px-0">
+                    <input type="number" name="qte" value=1 min=1 max={{ produit.stock }} class="form-control col-7">
+                    <button class="btn btn-info col-4">
+                        <i class="fa fa-cart-plus"></i>
+                    </button>
+                </div>
+            </div>
         </form>
     </div>
 </div>

@@ -7,7 +7,7 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-1">
             <a class="navbar-brand" href="#">Boutique</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -21,9 +21,9 @@
 
                     {# 
                         Pour savoir si qqn est connecté, on teste la valeur de app.user
-                        {% if app.user %}
-                        ou
-                        if is_granted("IS_AUTHENTICATED_FULLY")
+                            {% if app.user %}
+                        ou on utilise la fonction is_granted()
+                            if is_granted("IS_AUTHENTICATED_FULLY")
                     #}
                             
                     {# {% if app.user %}
